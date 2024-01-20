@@ -1,41 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'dart:math';
 
-import '../../data/models/models.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../controllers/controllers.dart';
 
 class Chart extends StatelessWidget {
-  const Chart({super.key, required this.recentTransactions});
-  final List<Transaction> recentTransactions;
-
-  List<Map<String, Object>> get groupedTransactionValues {
-    return List.generate(7, (index) {
-      final weekDay = DateTime.now().subtract(
-        Duration(days: index),
-      );
-      double totalSum = 0.0;
-      for (var i = 0; i < recentTransactions.length; i++) {
-        if (recentTransactions[i].date.day == weekDay.day &&
-            recentTransactions[i].date.month == weekDay.month &&
-            recentTransactions[i].date.year == weekDay.year) {
-          totalSum += recentTransactions[i].value;
-        }
-      }
-
-      return {
-        'day': DateFormat.E().format(weekDay).substring(0, 1),
-        'value': totalSum
-      };
-    });
-  }
-
-  double get weekTotalValue {
-    return groupedTransactionValues.fold(0.0, (sum, tr) {
-      return sum + (tr['value'] as double);
-    });
-  }
+  const Chart({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => ChartController(),
+      child: const _ChartBody(),
+    );
+  }
+}
+
+class _ChartBody extends StatelessWidget {
+  const _ChartBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final chartController = Provider.of<ChartController>(context);
     return Card(
       elevation: 6,
       margin: const EdgeInsets.all(10),
@@ -43,11 +32,12 @@ class Chart extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: groupedTransactionValues.map((tr) {
+          children: chartController.groupedTransactionValues.map((tr) {
             return _ChartBar(
                 label: tr['day'].toString(),
                 value: tr['value'] as double,
-                percentage: (tr['value'] as double) / weekTotalValue);
+                percentage:
+                    (tr['value'] as double) / chartController.weekTotalValue);
           }).toList(),
         ),
       ),
@@ -85,7 +75,7 @@ class _ChartBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5)),
               ),
               FractionallySizedBox(
-                heightFactor: percentage,
+                heightFactor: max(0.0, percentage),
                 child: Container(
                   decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.secondary,
