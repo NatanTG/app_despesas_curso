@@ -1,30 +1,43 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
-import '../controllers/controllers.dart';
+import '../../data/models/models.dart';
 
 class Chart extends StatelessWidget {
-  const Chart({
-    super.key,
-  });
+  final List<Transaction> recentTransactions;
+  const Chart({super.key, required this.recentTransactions});
 
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ChartController(),
-      child: const _ChartBody(),
-    );
+  List<Map<String, Object>> get groupedTransactionValues {
+    return List.generate(7, (index) {
+      final weekDay = DateTime.now().subtract(
+        Duration(days: index),
+      );
+      double totalSum = 0.0;
+      for (var i = 0; i < recentTransactions.length; i++) {
+        if (recentTransactions[i].date.day == weekDay.day &&
+            recentTransactions[i].date.month == weekDay.month &&
+            recentTransactions[i].date.year == weekDay.year) {
+          totalSum += recentTransactions[i].value;
+        }
+      }
+
+      return {
+        'day': DateFormat.E().format(weekDay).substring(0, 1),
+        'value': totalSum
+      };
+    });
   }
-}
 
-class _ChartBody extends StatelessWidget {
-  const _ChartBody({super.key});
+  double get weekTotalValue {
+    return groupedTransactionValues.fold(0.0, (sum, tr) {
+      return sum + (tr['value'] as double);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final chartController = Provider.of<ChartController>(context);
     return Card(
       elevation: 6,
       margin: const EdgeInsets.all(10),
@@ -32,12 +45,11 @@ class _ChartBody extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: chartController.groupedTransactionValues.map((tr) {
+          children: groupedTransactionValues.map((tr) {
             return _ChartBar(
                 label: tr['day'].toString(),
                 value: tr['value'] as double,
-                percentage:
-                    (tr['value'] as double) / chartController.weekTotalValue);
+                percentage: (tr['value'] as double) / weekTotalValue);
           }).toList(),
         ),
       ),

@@ -64,7 +64,11 @@ class _HomePage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(width: double.infinity, child: Chart()),
+          SizedBox(
+              width: double.infinity,
+              child: Chart(
+                recentTransactions: homeController.recentTransactions,
+              )),
           TransactionList(
             transactions: homeController.recentTransactions,
           ),
