@@ -27,7 +27,7 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay).substring(0, 1),
         'value': totalSum
       };
-    });
+    }).reversed.toList();
   }
 
   double get weekTotalValue {
@@ -63,16 +63,15 @@ class _ChartBar extends StatelessWidget {
   final double percentage;
 
   const _ChartBar(
-      {super.key,
-      required this.label,
-      required this.value,
-      required this.percentage});
+      {required this.label, required this.value, required this.percentage});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FittedBox(child: Text(value.toStringAsFixed(2))),
+        SizedBox(
+            height: 20,
+            child: FittedBox(child: Text(value.toStringAsFixed(2)))),
         const SizedBox(height: 4),
         SizedBox(
           height: 60,
