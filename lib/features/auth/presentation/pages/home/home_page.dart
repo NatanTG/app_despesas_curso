@@ -61,6 +61,7 @@ class _HomePage extends StatelessWidget {
   SingleChildScrollView _buildBody(context, homeController) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
               width: double.infinity,
