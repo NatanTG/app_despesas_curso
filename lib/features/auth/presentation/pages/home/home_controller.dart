@@ -9,8 +9,10 @@ class HomeController extends ChangeNotifier {
   List<Transaction> get recentTransactions =>
       _transactionUseCase.recentTransactions;
 
-  void addTransaction(String title, double value) {
-    _transactionUseCase.addTransaction(title, value);
+  void addTransaction(String title, double value, DateTime date) {
+    _transactionUseCase.addTransaction(title, value, date);
+    notifyListeners();
+  }
     notifyListeners();
   }
 }
