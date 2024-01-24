@@ -5,10 +5,12 @@ import '../../domain/entities/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final Function removeTransaction;
 
   const TransactionList({
     super.key,
     required this.transactions,
+    required this.removeTransaction,
   });
 
   @override
@@ -47,6 +49,22 @@ class TransactionList extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
+              trailing: MediaQuery.of(context).size.width > 400
+                  ? TextButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.delete),
+                      label: const Text('Excluir'),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Theme.of(context).colorScheme.error,
+                      ),
+                    )
+                  : IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Theme.of(context).colorScheme.error,
+                      onPressed: () {
+                        removeTransaction(transaction.id);
+                      },
+                    ),
             ),
           );
         },

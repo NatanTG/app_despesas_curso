@@ -69,6 +69,7 @@ class _HomePage extends StatelessWidget {
               )),
           TransactionList(
             transactions: homeController.recentTransactions,
+            removeTransaction: homeController.removeTransaction,
           ),
         ],
       ),

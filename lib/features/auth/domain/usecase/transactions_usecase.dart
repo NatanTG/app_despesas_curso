@@ -3,24 +3,7 @@ import 'dart:math';
 import '../../data/models/models.dart';
 
 class TransactionUseCase {
-  final List<Transaction> _transactions = [
-    Transaction(
-        id: 'product1',
-        title: 'Tênis Nike',
-        value: 230.50,
-        date: DateTime.now()),
-    Transaction(
-        id: 'product2',
-        title: 'Camisa Oakley',
-        value: 130.50,
-        date: DateTime.now()),
-    Transaction(
-        id: 'product3',
-        title: 'Calça Jeans',
-        value: 230.50,
-        date: DateTime.now()),
-  ];
-
+  final List<Transaction> _transactions = [];
   List<Transaction> get recentTransactions {
     return _transactions.where((tr) {
       return tr.date.isAfter(DateTime.now().subtract(
@@ -45,5 +28,9 @@ class TransactionUseCase {
 
   void _updateTransactionList(Transaction newTransaction) {
     _transactions.add(newTransaction);
+  }
+
+  void removeTransaction(String id) {
+    _transactions.removeWhere((tr) => tr.id == id);
   }
 }

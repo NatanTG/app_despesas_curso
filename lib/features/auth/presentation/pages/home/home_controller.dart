@@ -13,6 +13,9 @@ class HomeController extends ChangeNotifier {
     _transactionUseCase.addTransaction(title, value, date);
     notifyListeners();
   }
+
+  void removeTransaction(String id) {
+    _transactionUseCase.removeTransaction(id);
     notifyListeners();
   }
 }
