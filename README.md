@@ -1,16 +1,22 @@
-# app_despesas_curso
+App Despesas
+Visão Geral
+O projeto "Controle de Despesas" é uma aplicação Flutter simples desenvolvida como parte do curso da Cod3r Cursos Online na plataforma Udemy. A aplicação visa acompanhar e gerenciar despesas diárias, incluindo um recurso gráfico intuitivo que exibe o total gasto nos últimos 7 dias, proporcionando uma visão rápida e clara do padrão de gastos recente.
 
-A new Flutter project.
+Funcionalidades Principais
+Registro de Despesas: Cadastre suas despesas diárias com informações básicas, como nome, valor e data.
 
-## Getting Started
+Visualização Gráfica: Um gráfico interativo que destaca os gastos totais nos últimos 7 dias, proporcionando uma visão visual do comportamento financeiro recente.
 
-This project is a starting point for a Flutter application.
+Demonstração do Gráfico
 
-A few resources to get you started if this is your first Flutter project:
+Descrição da imagem: Gráfico de barras mostrando o total gasto nos últimos 7 dias.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Requisitos de Sistema
+Flutter (versão 3.13.9)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Configuração
+Clone o repositório: git clone https://github.com/seu-usuario/seu-projeto.git
+Navegue até o diretório do projeto: cd seu-projeto
+Instale as dependências: flutter pub get
+Configure as variáveis de ambiente necessárias (consulte o arquivo .env.example).
+Inicie o aplicativo: flutter run
