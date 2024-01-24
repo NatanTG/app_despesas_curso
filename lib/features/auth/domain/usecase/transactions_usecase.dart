@@ -29,17 +29,17 @@ class TransactionUseCase {
     }).toList();
   }
 
-  void addTransaction(String title, double value) {
-    final newTransaction = _createNewTransaction(title, value);
+  void addTransaction(String title, double value, DateTime date) {
+    final newTransaction = _createNewTransaction(title, value, date);
     _updateTransactionList(newTransaction);
   }
 
-  Transaction _createNewTransaction(String title, double value) {
+  Transaction _createNewTransaction(String title, double value, DateTime date) {
     return Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
   }
 
