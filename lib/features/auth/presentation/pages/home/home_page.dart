@@ -19,9 +19,7 @@ class HomePage extends StatelessWidget {
 }
 
 class _HomePage extends StatelessWidget {
-  const _HomePage({
-    super.key,
-  });
+  const _HomePage();
 
   _openTransactionFormModal(
       BuildContext context, HomeController homeController) {
