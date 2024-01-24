@@ -24,7 +24,7 @@ class _TransactionFormState extends State<TransactionForm> {
     if (title.isEmpty || value <= 0) {
       return;
     }
-
+    Navigator.of(context).pop();
     widget.onSubmit(title, value);
   }
 
@@ -54,7 +54,6 @@ class _TransactionFormState extends State<TransactionForm> {
               TextButton(
                 onPressed: () {
                   _submitForm();
-                  Navigator.of(context).pop();
                 },
                 child: const Text('Nova Transação'),
               ),
