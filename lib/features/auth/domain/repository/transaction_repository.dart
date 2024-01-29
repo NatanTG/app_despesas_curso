@@ -2,8 +2,9 @@ import 'dart:math';
 
 import '../../data/models/models.dart';
 
-class TransactionUseCase {
+class TransactionRepository {
   final List<Transaction> _transactions = [];
+
   List<Transaction> get recentTransactions {
     return _transactions.where((tr) {
       return tr.date.isAfter(DateTime.now().subtract(
@@ -12,7 +13,7 @@ class TransactionUseCase {
     }).toList();
   }
 
-  void addTransaction(String title, double value, DateTime date) {
+  addTransaction(String title, double value, DateTime date) {
     final newTransaction = _createNewTransaction(title, value, date);
     _updateTransactionList(newTransaction);
   }
@@ -26,11 +27,11 @@ class TransactionUseCase {
     );
   }
 
-  void _updateTransactionList(Transaction newTransaction) {
+  _updateTransactionList(Transaction newTransaction) {
     _transactions.add(newTransaction);
   }
 
-  void removeTransaction(String id) {
+  removeTransaction(String id) {
     _transactions.removeWhere((tr) => tr.id == id);
   }
 }

@@ -38,7 +38,7 @@ class ExpensesApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
