@@ -2,6 +2,8 @@
 ## Visão Geral
 O projeto "Controle de Despesas" é uma aplicação Flutter simples desenvolvida como parte do curso da Cod3r Cursos Online na plataforma Udemy. A aplicação visa acompanhar e gerenciar despesas diárias, incluindo um recurso gráfico intuitivo que exibe o total gasto nos últimos 7 dias, proporcionando uma visão rápida e clara do padrão de gastos recente.
 
+OBS: Apliquei o desing pattern Bloc no projeto.
+
 Feito no curso da Udemy Aprenda Flutter e Desenvolva Apps Para Android e IOS - Leonardo Moura Leitao
 
 ## Funcionalidades Principais
